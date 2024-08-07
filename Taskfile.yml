@@ -1,0 +1,132 @@
+version: "3"
+
+vars:
+  BIN: "{{.ROOT_DIR}}/bin"
+  OUT_DIR: "{{.ROOT_DIR}}/build"
+  APP_NAME: "application"
+  HOOKS_DIR: "{{.ROOT_DIR}}/hooks"
+
+env:
+  CGO_ENABLED: "0"
+
+tasks:
+  default:
+    cmds:
+      - task: build
+      - task: test
+
+  install:
+    desc: Install required tools
+    cmds:
+      - echo "🔧  Installing required tools..."
+      - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+      - go install github.com/cosmtrek/air@latest
+      - echo "✅ Tools installed."
+
+  setup:hooks:
+    desc: Set up Git hooks
+    cmds:
+      - echo "🔗  Setting up Git hooks..."
+      - mkdir -p .git/hooks
+      - ln -sf {{.HOOKS_DIR}}/pre-commit .git/hooks/pre-commit
+      - echo "✅ Git hooks set up."
+
+  setup:
+    desc: Set up environment, install tools, and configure hooks
+    cmds:
+      - echo "🛠️  Setting up environment..."
+      - task install
+      - task setup:hooks
+      - task update:dependencies
+      - echo "✅ Setup completed."
+
+  setup:app:
+    desc: Set up the application environment, including dependencies, hooks, and checks
+    cmds:
+      - task setup
+      - task format
+      - task lint
+      - task test
+      - echo "🚀  Application setup completed."
+
+  dev:
+    desc: Run the application in development mode with hot reloading
+    cmds:
+      - echo "🔄  Starting development mode with hot reloading..."
+      - air
+      - echo "✅ Development server is running."
+
+build:
+  desc: Build the application
+  deps:
+    - clean
+  cmds:
+    - echo "🏗️  Building the application..."
+    - go build -o {{.OUT_DIR}}/{{.APP_NAME}} main.go
+    - echo "✅ Build completed."
+
+  prod:
+    desc: Run the application in production mode
+    cmds:
+      - echo "🚀  Running the application in production mode..."
+      - "{{.OUT_DIR}}/{{.APP_NAME}}"
+      - echo "✅ Application running in production mode."
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - echo "🧹  Cleaning build artifacts..."
+      - rm -rf {{.OUT_DIR}}
+      - echo "✅ Clean completed."
+
+  format:
+    desc: Format code
+    cmds:
+      - echo "📝  Formatting code..."
+      - gofmt -w .
+      - echo "✅ Code formatting completed."
+
+  test:
+    desc: Run tests
+    cmds:
+      - echo "🧪  Running tests..."
+      - go test ./...
+      - echo "✅ Tests completed."
+
+  lint:
+    desc: Run lint checks
+    cmds:
+      - echo "🔍  Running lint checks..."
+      - golangci-lint run
+      - echo "✅ Lint checks completed."
+
+  lint:fix:
+    desc: Run lint checks and fix issues
+    cmds:
+      - echo "🔧  Running lint checks and fixing issues..."
+      - golangci-lint run --fix
+      - echo "✅ Lint checks and fixes completed."
+
+  benchmark:
+    desc: Run benchmarks
+    cmds:
+      - echo "📊  Running benchmarks..."
+      - go test -bench=. ./...
+      - echo "✅ Benchmarks completed."
+
+  update:dependencies:
+    desc: Update Go module dependencies to their latest versions
+    cmds:
+      - echo "🔄  Updating dependencies..."
+      - go get -u ./...
+      - go mod tidy
+      - echo "✅ Dependencies updated."
+
+  test:coverage:
+    desc: Generate test coverage report
+    cmds:
+      - echo "📈  Generating test coverage report..."
+      - go test -coverprofile=coverage.out ./...
+      - go tool cover -html=coverage.out -o coverage.html
+      - open coverage.html
+      - echo "✅ Test coverage report generated."
