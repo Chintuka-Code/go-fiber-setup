@@ -22,7 +22,7 @@ fi
 
 # Format code
 echo "${blue}${tool} Formatting code...${reset}"
-task fmt
+task format
 if [ $? -ne 0 ]; then
   echo "${red}${crossmark} Formatting failed. Please fix the formatting issues before committing.${reset}"
   exit 1
