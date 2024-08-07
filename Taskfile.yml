@@ -29,6 +29,7 @@ tasks:
       - echo "🔗  Setting up Git hooks..."
       - mkdir -p .git/hooks
       - ln -sf {{.HOOKS_DIR}}/pre-commit .git/hooks/pre-commit
+      - ln -sf {{.HOOKS_DIR}}/pre-push .git/hooks/pre-push
       - echo "✅ Git hooks set up."
 
   setup:
