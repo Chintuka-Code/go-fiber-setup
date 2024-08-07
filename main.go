@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 
 	"struct-validation/src/user"
@@ -20,6 +22,8 @@ func main() {
 	// Fiber instance
 	app := fiber.New()
 	setUpRoutes(app)
-	// start server
-	app.Listen(":8000")
+
+	if err := app.Listen(":8000"); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }

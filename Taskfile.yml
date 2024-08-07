@@ -59,14 +59,14 @@ tasks:
       - air
       - echo "✅ Development server is running."
 
-build:
-  desc: Build the application
-  deps:
-    - clean
-  cmds:
-    - echo "🏗️  Building the application..."
-    - go build -o {{.OUT_DIR}}/{{.APP_NAME}} main.go
-    - echo "✅ Build completed."
+  build:
+    desc: Build the application
+    deps:
+      - clean
+    cmds:
+      - echo "🏗️  Building the application..."
+      - go build -o {{.OUT_DIR}}/{{.APP_NAME}} main.go
+      - echo "✅ Build completed."
 
   prod:
     desc: Run the application in production mode
