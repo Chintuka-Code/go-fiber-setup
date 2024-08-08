@@ -1,6 +1,10 @@
 package user
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"struct-validation/src/exception"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func GetUser(c *fiber.Ctx) error {
 
@@ -8,6 +12,5 @@ func GetUser(c *fiber.Ctx) error {
 }
 
 func PostUser(c *fiber.Ctx) error {
-
-	return c.SendString("Create User")
+	return exception.New(fiber.StatusBadRequest, "Failed to create user")
 }
