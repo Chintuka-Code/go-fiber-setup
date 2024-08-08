@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"github.com/fatih/color"
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 
@@ -35,8 +36,8 @@ func GlobalErrorCatch(c *fiber.Ctx) error {
 	LOG.WithFields(logrus.Fields{
 		"status_code": code,
 		"error":       message,
-	}).Error("Error occurred")
-	LOG.Error("StackTrace:\n" + stackTrace)
+	}).Error(color.New(color.FgCyan).Sprint("Error occurred"))
+	LOG.Error(color.New(color.FgBlue).Sprint("Stack Trace") + "\n" + stackTrace)
 
 	return c.Status(code).SendString(message)
 }
