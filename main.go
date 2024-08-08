@@ -16,6 +16,8 @@ func setUpRoutes(app *fiber.App) {
 	app.Get("/", hello)
 
 	app.Get("/api/user", user.GetUser)
+	app.Post("/api/user", user.PostUser)
+
 }
 
 func main() {

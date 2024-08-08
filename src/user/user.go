@@ -6,3 +6,8 @@ func GetUser(c *fiber.Ctx) error {
 
 	return c.SendString("All Bookmarks")
 }
+
+func PostUser(c *fiber.Ctx) error {
+
+	return c.SendString("Create User")
+}
