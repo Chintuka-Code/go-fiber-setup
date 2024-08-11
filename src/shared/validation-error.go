@@ -1,5 +1,7 @@
 package shared
 
+import "fmt"
+
 type ValidationError struct {
 	FailedField string      `json:"field"`
 	Tag         string      `json:"tag"`
@@ -24,4 +26,14 @@ func (v ValidationErrorList) Errors() []ValidationError {
 
 func NewValidationError(errors []ValidationError) ValidationErrorList {
 	return ValidationErrorList(errors)
+}
+
+func (v ValidationErrorList) Pretty() map[string][]string {
+	prettyErrors := make(map[string][]string)
+	for _, err := range v {
+		if err.HasError {
+			prettyErrors[err.FailedField] = append(prettyErrors[err.FailedField], fmt.Sprintf("Field '%s' failed validation with tag '%s' for value '%v'", err.FailedField, err.Tag, err.Value))
+		}
+	}
+	return prettyErrors
 }
