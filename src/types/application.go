@@ -39,9 +39,9 @@ func (app *Application) SetValidator() {
 
 func (app *Application) SetMiddleware() {
 	app.server.Use(recover.New())
-	app.server.Use(middleware.ValidationErrorCatch)
-	app.server.Use(middleware.GlobalErrorCatch)
 	app.server.Use(middleware.RequestLogger)
+	app.server.Use(middleware.GlobalErrorCatch)
+	app.server.Use(middleware.ValidationErrorCatch)
 }
 
 func (app *Application) StartListen() {

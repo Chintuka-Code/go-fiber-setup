@@ -1,14 +1,12 @@
 package validation
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
 )
 
 type PostUser struct {
 	Name string `validate:"required,min=5,max=20"`
-	Age  int    `validate:"required,teener"`
+	Age  int    `validate:"required"`
 }
 
 func ValidatePostUser(c *fiber.Ctx) error {
@@ -21,8 +19,7 @@ func ValidatePostUser(c *fiber.Ctx) error {
 
 	err := ValidateStruct(data)
 	if err != nil {
-		fmt.Println(err)
-		return c.Status(fiber.StatusBadRequest).Send([]byte("Some Error"))
+		return err
 	}
 	return c.Next()
 }

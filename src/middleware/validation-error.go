@@ -11,7 +11,7 @@ func ValidationErrorCatch(c *fiber.Ctx) error {
 
 	if err != nil {
 		if validationErrs, ok := err.(shared.ValidationErrorList); ok {
-			return c.Status(fiber.StatusBadRequest).JSON(validationErrs.Errors())
+			return c.Status(400).JSON(validationErrs.Errors())
 		}
 		return err
 	}

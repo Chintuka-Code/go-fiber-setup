@@ -13,10 +13,10 @@ func InitValidator() *validator.Validate {
 	return Validator
 }
 
-// ValidateStruct returns an error if validation fails
 func ValidateStruct(data interface{}) error {
 	var validationErrors []shared.ValidationError
 	errs := Validator.Struct(data)
+
 	if errs != nil {
 		for _, err := range errs.(validator.ValidationErrors) {
 			validationErrors = append(validationErrors, shared.ValidationError{
@@ -26,7 +26,7 @@ func ValidateStruct(data interface{}) error {
 				HasError:    true,
 			})
 		}
-		return shared.ValidationErrorList(validationErrors)
+		return shared.NewValidationError(validationErrors)
 	}
 	return nil
 }

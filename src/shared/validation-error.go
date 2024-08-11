@@ -21,3 +21,7 @@ func (v ValidationErrorList) Error() string {
 func (v ValidationErrorList) Errors() []ValidationError {
 	return v
 }
+
+func NewValidationError(errors []ValidationError) ValidationErrorList {
+	return ValidationErrorList(errors)
+}

@@ -7,8 +7,8 @@ import (
 func main() {
 	app := types.NewApplication(":8000", "/api/v1")
 
-	app.SetValidator()
 	app.SetMiddleware()
 	app.SetUpRoutes()
+	app.SetValidator()
 	app.StartListen()
 }

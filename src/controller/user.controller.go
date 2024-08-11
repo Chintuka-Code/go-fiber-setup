@@ -10,6 +10,5 @@ func GetUser(c *fiber.Ctx) error {
 }
 
 func PostUser(c *fiber.Ctx) error {
-	// Logic to create a user
 	return c.JSON(fiber.Map{"message": "Post User"})
 }
