@@ -1,9 +1,15 @@
 package customvalidation
 
 import (
+	"fmt"
+
 	"github.com/go-playground/validator/v10"
 )
 
 func RegisterCustomValidation(validator *validator.Validate) {
-	validator.RegisterValidation("requiredName", RequiredName)
+	err := validator.RegisterValidation("requiredName", RequiredName)
+
+	if err != nil {
+		fmt.Println("Error registering custom validation :", err.Error())
+	}
 }

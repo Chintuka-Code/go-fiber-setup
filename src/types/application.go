@@ -10,7 +10,7 @@ import (
 	"struct-validation/src/middleware"
 	"struct-validation/src/routes"
 	"struct-validation/src/validation"
-	customvalidation "struct-validation/src/validation/custom-validation"
+	customValidation "struct-validation/src/validation/custom-validation"
 )
 
 type Application struct {
@@ -36,7 +36,7 @@ func (app *Application) SetUpRoutes() {
 
 func (app *Application) SetValidator() {
 	app.Validator = validation.InitValidator()
-	customvalidation.RegisterCustomValidation(app.Validator)
+	customValidation.RegisterCustomValidation(app.Validator)
 }
 
 func (app *Application) SetMiddleware() {
