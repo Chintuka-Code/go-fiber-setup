@@ -57,7 +57,15 @@ tasks:
     cmds:
       - echo "🔄  Starting development mode with hot reloading..."
       - air
+      - swag init
       - echo "✅ Development server is running."
+
+  docs:
+    desc: Generating the swagger api docs
+    cmds:
+      - echo "🔄  Generating the swagger api docs..."
+      - swag init
+      - echo "✅ Complete."
 
   build:
     desc: Build the application

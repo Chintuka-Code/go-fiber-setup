@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 
 	"struct-validation/src/localize"
@@ -42,6 +43,7 @@ func (app *Application) SetValidator() {
 
 func (app *Application) SetMiddleware() {
 	app.server.Use(recover.New())
+	app.server.Use(cors.New())
 	app.server.Use(localize.NewLocalization())
 	app.server.Use(middleware.RequestLogger)
 	app.server.Use(middleware.GlobalErrorCatch)
@@ -52,4 +54,9 @@ func (app *Application) StartListen() {
 	if err := app.server.Listen(app.port); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
+}
+
+func (app *Application) InitSwagger() {
+	// @Security Bearer
+	app.server.Get("/docs/*", middleware.NewSwagger())
 }

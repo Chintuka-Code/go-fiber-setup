@@ -1,0 +1,83 @@
+basePath: /api/v1
+host: localhost:8000
+info:
+  contact: {}
+  description: This is a sample Go Fiber Application.
+  title: Go Fiber Setup
+  version: "3.0"
+paths:
+  /user:
+    get:
+      consumes:
+      - multipart/form-data
+      description: Get user details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a user
+      tags:
+      - user
+    post:
+      consumes:
+      - multipart/form-data
+      description: Create a new user with the provided details
+      parameters:
+      - description: Name of the user
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: Age of the user
+        in: formData
+        name: age
+        required: true
+        type: integer
+      - collectionFormat: csv
+        description: Address of the user
+        in: formData
+        items:
+          type: string
+        name: address
+        required: true
+        type: array
+      - collectionFormat: csv
+        description: Hobbies of the user
+        in: formData
+        items:
+          type: string
+        name: hobbies
+        required: true
+        type: array
+      - description: Image uploaded by the user
+        in: formData
+        name: image
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new user
+      tags:
+      - user
+schemes:
+- http
+security:
+- Bearer: []
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
