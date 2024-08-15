@@ -2,11 +2,13 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
+
+	"struct-validation/src/localize"
 )
 
 func GetUser(c *fiber.Ctx) error {
-	// Logic to get a user
-	return c.JSON(fiber.Map{"message": "Get User"})
+	message := localize.GetTranslation(c, "HELLO")
+	return c.JSON(fiber.Map{"message": message})
 }
 
 func PostUser(c *fiber.Ctx) error {

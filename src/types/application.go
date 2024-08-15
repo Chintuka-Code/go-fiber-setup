@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 
+	"struct-validation/src/localize"
 	"struct-validation/src/middleware"
 	"struct-validation/src/routes"
 	"struct-validation/src/validation"
@@ -41,6 +42,7 @@ func (app *Application) SetValidator() {
 
 func (app *Application) SetMiddleware() {
 	app.server.Use(recover.New())
+	app.server.Use(localize.NewLocalization())
 	app.server.Use(middleware.RequestLogger)
 	app.server.Use(middleware.GlobalErrorCatch)
 	app.server.Use(middleware.ValidationErrorCatch)
