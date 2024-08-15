@@ -50,6 +50,7 @@ tasks:
       - task format
       - task lint
       - task test
+      - task docs
       - echo "🚀  Application setup completed."
 
   dev:
