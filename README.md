@@ -2,6 +2,7 @@
 
 This project serves as a base template for building Go applications using the Fiber web framework. It includes a clean and scalable structure with various essential features to kickstart your development process.
 https://github.com/Chintuka-Code/go-fiber-setup/settings
+
 ## Features
 
 - **Fiber**: High-performance Go web framework.
@@ -29,3 +30,25 @@ Ensure you have Go installed on your system. If not, you can download it from [g
    ```bash
    https://github.com/Chintuka-Code/go-fiber-setup.git
    cd go-fiber-setup
+   ```
+
+2. ### Make the `setup.sh` Script Executable
+
+   Before running the setup script, ensure it has the correct permissions:
+
+   ```bash
+   chmod +x setup.sh
+   ```
+
+3. ### Run the Setup Script
+
+   The `setup.sh` script installs the necessary tools and runs the project setup:
+
+   ```bash
+   ./setup.sh
+   ```
+
+   **The setup script will:**
+
+   - Install the `Task` command runner globally if not already installed.
+   - Run the task setup:app command to initialize the project.
