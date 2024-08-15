@@ -1,7 +1,7 @@
 # Go Fiber Project Template
 
 This project serves as a base template for building Go applications using the Fiber web framework. It includes a clean and scalable structure with various essential features to kickstart your development process.
-
+https://github.com/Chintuka-Code/go-fiber-setup/settings
 ## Features
 
 - **Fiber**: High-performance Go web framework.
@@ -27,5 +27,5 @@ Ensure you have Go installed on your system. If not, you can download it from [g
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/yourproject.git
-   cd yourproject
+   https://github.com/Chintuka-Code/go-fiber-setup.git
+   cd go-fiber-setup
