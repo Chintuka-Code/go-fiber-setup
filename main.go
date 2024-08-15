@@ -1,7 +1,7 @@
 package main
 
 import (
-	// _ "struct-validation/docs"
+	_ "struct-validation/docs"
 	"struct-validation/src/types"
 )
 
