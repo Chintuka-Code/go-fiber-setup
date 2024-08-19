@@ -1,4 +1,4 @@
-package main
+package encryption
 
 import (
 	"crypto/rand"
@@ -57,20 +57,4 @@ func (pe *PasswordEncryption) VerifyHash(storedHash, plaintextPassword string) b
 
 	computedHash := pe.GenerateHash(plaintextPassword, salt)
 	return computedHash == storedHashHex
-}
-
-func main() {
-
-	pe, peErr := New(15)
-	if peErr != nil {
-		fmt.Print(peErr)
-	}
-
-	salt, err := pe.GenerateSalt()
-	if err != nil {
-		fmt.Println("Something went wrong")
-	}
-	hash := pe.GenerateHash("Hello", salt)
-	fmt.Println(hash)
-
 }
